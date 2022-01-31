@@ -58,6 +58,7 @@ class FileUploadingCubit extends Cubit<FileUploadingState> {
   }
 
   void reset() {
+    countCubit?.reset();
     interactor.resetAll();
   }
 

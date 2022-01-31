@@ -98,4 +98,21 @@ class FilesCountCubit extends Cubit<FilesCountState> {
       },
     );
   }
+
+  /// Сбросить.
+  void reset() {
+    state.maybeWhen(
+        inProgress: (
+          int totalFiles,
+          int remainingFiles,
+        ) {
+          final int uploadedFiles = totalFiles - remainingFiles;
+          if (uploadedFiles == 0) {
+            emit(const NoFilesCountState());
+          } else {
+            emit(LoadingFinishedFilesCountState(totalFiles: uploadedFiles));
+          }
+        },
+        orElse: () {});
+  }
 }
