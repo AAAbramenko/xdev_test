@@ -53,10 +53,10 @@ class ResetButton extends BlocBuilder<FilesCountCubit, FilesCountState> {
             key: key,
             builder: (BuildContext context, FilesCountState state) {
               final VoidCallback? onPressed = state.maybeWhen<VoidCallback?>(
-                loadingFinished: (int totalFiles) => () {
+                noFiles: () => null,
+                orElse: () => () {
                   context.read<FileUploadingCubit>().reset();
                 },
-                orElse: () => null,
               );
 
               return _BottomTextButton(
